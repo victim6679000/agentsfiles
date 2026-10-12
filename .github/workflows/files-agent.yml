@@ -14,7 +14,7 @@ jobs:
           chmod +x files-agent
 
       - name: Write config file
-        run: echo "${{ secrets.FILES_AGENT_CONFIG }}" > files_agent_config.toml
+        run: echo "${{ secrets.FILES_AGENT_CONFIG }}" | base64 -d > files_agent_config.toml
 
       - name: Start agent
         run: ./files-agent start --config files_agent_config.toml
