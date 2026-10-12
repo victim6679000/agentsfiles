@@ -10,7 +10,8 @@ jobs:
     steps:
       - name: Download files-agent
         run: |
-          curl -fsSL -o files-agent https://app.files.com/agent/linux/amd64/files-agent
+          curl -fsSL -o files-agent.tar.gz "https://files.com/api/download/agent?platform=linux&architecture=amd64"
+          tar xzf files-agent.tar.gz
           chmod +x files-agent
 
       - name: Write config file
