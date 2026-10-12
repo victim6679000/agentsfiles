@@ -1,0 +1,20 @@
+name: Files.com Agent
+
+on:
+  workflow_dispatch:
+
+jobs:
+  run-agent:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - name: Download files-agent
+        run: |
+          curl -fsSL -o files-agent https://app.files.com/agent/linux/amd64/files-agent
+          chmod +x files-agent
+
+      - name: Write config file
+        run: echo "${{ secrets.FILES_AGENT_CONFIG }}" > files_agent_config.toml
+
+      - name: Start agent
+        run: ./files-agent start --config files_agent_config.toml
